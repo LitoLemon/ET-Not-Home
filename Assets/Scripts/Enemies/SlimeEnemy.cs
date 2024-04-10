@@ -22,12 +22,11 @@ public class SlimeEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D rayDown = Physics2D.Raycast(transform.position + new Vector3(0.25f * transform.localScale.x , transform.localScale.y * -0.25f), Vector2.down, 0.05f);
+        RaycastHit2D rayDown = Physics2D.Raycast(transform.position + new Vector3(0.25f * transform.localScale.x , transform.localScale.y * -0.25f), Vector2.down, 0.05f, ~(LayerMask.GetMask("Items") + LayerMask.GetMask("Enemies")));
         Debug.DrawRay(transform.position + new Vector3(0.25f * transform.localScale.x, transform.localScale.y * -0.25f), Vector2.down * 0.05f, Color.blue);
         RaycastHit2D raySide = Physics2D.Raycast(transform.position + new Vector3(0.25f * transform.localScale.x, transform.localScale.y * -0.125f), Vector2.left * (transform.localScale.x / -transform.localScale.x /*<- zorgt dat het getal -1 is. 
-        * zorgt dat het getal positief is als hij eerder negatief was en tegenovergestelde->*/ * transform.localScale.x), 0.06f);
+        * zorgt dat het getal positief is als hij eerder negatief was en tegenovergestelde->*/ * transform.localScale.x), 0.06f, ~LayerMask.GetMask("Items"));
         Debug.DrawRay(transform.position + new Vector3(0.25f * transform.localScale.x, transform.localScale.y * -0.125f), Vector2.left * (transform.localScale.x / -transform.localScale.x * transform.localScale.x) * 0.06f, Color.red);
-        Debug.Log(raySide.collider);
         if (rayDown.collider == null || rayDown.collider.gameObject.layer != 3 || (raySide.collider != null && raySide.collider.gameObject.layer != 9 && raySide.collider.gameObject.layer != 10))
         {
             Flip();

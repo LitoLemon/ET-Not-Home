@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FallingEnemy : MonoBehaviour
-{
-    public GameObject TopStandable;
+{   
+    public GameObject topStandable;
+    public float speed;
     public float timeMax;
     private float time;
-    private bool groundHit = false;
+    public bool groundHit = false;
     private Vector3 startPos;
     private Rigidbody2D rb;
     // Start is called before the first frame update
@@ -35,7 +36,7 @@ public class FallingEnemy : MonoBehaviour
 
         if (groundHit)
         {
-            transform.Translate(Vector2.up * Time.deltaTime);
+            transform.Translate(speed * Time.deltaTime * Vector2.up);
             if(transform.position.y >= startPos.y)
             {
                 groundHit = false;
@@ -45,7 +46,7 @@ public class FallingEnemy : MonoBehaviour
         }
         if(time <=0)
         {
-            TopStandable.GetComponent<BoxCollider2D>().enabled = true;
+            topStandable.GetComponent<BoxCollider2D>().enabled = true;
         }
         else
         {
@@ -55,7 +56,7 @@ public class FallingEnemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == 3)
+        if (collision.gameObject.layer == 3 && collision.gameObject != topStandable)
         {
             if (collision.collider.gameObject.layer == 3)
             {
@@ -64,7 +65,7 @@ public class FallingEnemy : MonoBehaviour
             }
             else if (collision.collider.gameObject.layer == 9)
             {
-                TopStandable.GetComponent<BoxCollider2D>().enabled = false;
+                topStandable.GetComponent<BoxCollider2D>().enabled = false;
                 time = timeMax;
             }
         }

@@ -36,11 +36,11 @@ public class player_movement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        RaycastHit2D rayL = Physics2D.Raycast(new Vector2(transform.position.x - 0.4f, transform.position.y - 0.7f), Vector2.down, 0.05f);
+        RaycastHit2D rayL = Physics2D.Raycast(new Vector2(transform.position.x - 0.4f, transform.position.y - 0.7f), Vector2.down, 0.05f, ~(LayerMask.GetMask("Enemies") + LayerMask.GetMask("EnemyProjectiles")));
         Debug.DrawRay(new Vector2(transform.position.x - 0.4f, transform.position.y - 0.7f), Vector2.down * 0.05f, Color.red);
-        RaycastHit2D rayM = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.7f), Vector2.down, 0.05f);
+        RaycastHit2D rayM = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.7f), Vector2.down, 0.05f, ~(LayerMask.GetMask("Enemies") + LayerMask.GetMask("EnemyProjectiles")));
         Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - 0.7f), Vector2.down * 0.05f, Color.yellow);
-        RaycastHit2D rayR = Physics2D.Raycast(new Vector2(transform.position.x + 0.4f, transform.position.y - 0.7f), Vector2.down, 0.05f);
+        RaycastHit2D rayR = Physics2D.Raycast(new Vector2(transform.position.x + 0.4f, transform.position.y - 0.7f), Vector2.down, 0.05f, ~(LayerMask.GetMask("Enemies")+ LayerMask.GetMask("EnemyProjectiles")));
         Debug.DrawRay(new Vector2(transform.position.x + 0.4f, transform.position.y - 0.7f), Vector2.down * 0.05f, Color.blue);
         if(rayL.collider != null)
         {

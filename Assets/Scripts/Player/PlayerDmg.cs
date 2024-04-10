@@ -28,6 +28,7 @@ public class PlayerDmg : MonoBehaviour
             invTime = invTimeMax;
             invBool= true;
             anim.SetBool("hurt", true);
+            InventoryManager.AdjustItemAmount("Hp", -1);
         }
     }
     private void Update()
