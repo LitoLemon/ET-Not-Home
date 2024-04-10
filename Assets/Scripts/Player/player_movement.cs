@@ -9,7 +9,9 @@ public class player_movement : MonoBehaviour
     public float speed;
     public Vector2 jumpForce;
     public float maxSpeed;
+    public int maxJumps;
     private bool isGrounded = false;
+    private int jumps = 0;
     private Vector2 speedV2;
     private Rigidbody2D rb;
     private Animator anim;
@@ -34,10 +36,12 @@ public class player_movement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        RaycastHit2D rayL = Physics2D.Raycast(new Vector2(transform.position.x - 0.5f, transform.position.y - 0.71f), Vector2.down, 0.05f);
-        Debug.DrawRay(new Vector2(transform.position.x - 0.5f, transform.position.y - 0.71f), Vector2.down * 0.05f, Color.red);
-        RaycastHit2D rayR = Physics2D.Raycast(new Vector2(transform.position.x + 0.5f, transform.position.y - 0.71f), Vector2.down, 0.05f);
-        Debug.DrawRay(new Vector2(transform.position.x + 0.5f, transform.position.y - 0.71f), Vector2.down * 0.05f, Color.blue);
+        RaycastHit2D rayL = Physics2D.Raycast(new Vector2(transform.position.x - 0.4f, transform.position.y - 0.7f), Vector2.down, 0.05f);
+        Debug.DrawRay(new Vector2(transform.position.x - 0.4f, transform.position.y - 0.7f), Vector2.down * 0.05f, Color.red);
+        RaycastHit2D rayM = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.7f), Vector2.down, 0.05f);
+        Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - 0.7f), Vector2.down * 0.05f, Color.yellow);
+        RaycastHit2D rayR = Physics2D.Raycast(new Vector2(transform.position.x + 0.4f, transform.position.y - 0.7f), Vector2.down, 0.05f);
+        Debug.DrawRay(new Vector2(transform.position.x + 0.4f, transform.position.y - 0.7f), Vector2.down * 0.05f, Color.blue);
         if(rayL.collider != null)
         {
             if(rayL.collider.gameObject.layer == 3)
@@ -53,25 +57,42 @@ public class player_movement : MonoBehaviour
         {
             isGrounded = false;
         }
-        if(rayR.collider != null && !isGrounded)//checks if left ray is touching ground, and if so, it wont check if right ray is on ground
+        if (rayM.collider != null && !isGrounded)
         {
-            if(rayR.collider.gameObject.layer == 3)
+            if (rayM.collider.gameObject.layer == 3)
             {
                 isGrounded = true;
             }
         }
-        anim.SetBool("Grounded", isGrounded);
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !anim.GetBool("hurt"))
+        else if (rayR.collider != null && !isGrounded)
         {
-            rb.AddForce(jumpForce, ForceMode2D.Impulse);
+            if (rayR.collider.gameObject.layer == 3)
+            {
+                isGrounded = true;
+            }
         }
 
-        if (Input.GetAxis("Horizontal") > 0.001f && isGrounded && !anim.GetBool("hurt"))
+        
+        anim.SetBool("Grounded", isGrounded);
+        if (Input.GetButtonDown("Jump") && !anim.GetBool("hurt"))
+        {
+            if (isGrounded)
+            {
+                rb.AddForce(jumpForce, ForceMode2D.Impulse);
+            }
+            else if(jumps < maxJumps)
+            { 
+                rb.AddForce(new Vector2(Input.GetAxis("Horizontal") * 2, jumpForce.y), ForceMode2D.Impulse);
+            }
+            
+        }
+
+        if (Input.GetAxis("Horizontal") > 0.001f && !anim.GetBool("hurt"))
         {
             GetComponent<SpriteRenderer>().flipX = false;
             anim.SetBool("Walking", true);
         }
-        else if (Input.GetAxis("Horizontal") < -0.001f && isGrounded && !anim.GetBool("hurt"))
+        else if (Input.GetAxis("Horizontal") < -0.001f && !anim.GetBool("hurt"))
         {
             GetComponent<SpriteRenderer>().flipX = true;
             anim.SetBool("Walking", true);
