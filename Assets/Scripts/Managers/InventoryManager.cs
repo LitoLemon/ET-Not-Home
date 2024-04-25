@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class InventoryManager : MonoBehaviour
 {
-    public static bool loadingScene = false;
     public static Dictionary<string, int> Inventory = new()
     {
         {"Hp", 3},
@@ -16,22 +15,25 @@ public class InventoryManager : MonoBehaviour
     public static void AdjustItemAmount(string itemName, int amount)
     {
         Inventory[itemName] += amount;
-        UpdateUI();
-        CheckIfDead();
+        
+        if (CheckIfDead())
+        {
+            MySceneManager.LoadLastScene();
+        }
+        else
+        {
+            UIManager thisUIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+            thisUIManager.UpdateUI();
+        }
     }
-    
-    private static void UpdateUI()
-    {
-        //Update the UI
-    }
+   
 
-    public static void CheckIfDead()
+    public static bool CheckIfDead()
     {
         if (Inventory["Hp"] <= 0)
         {
-            //EndSceneManager.died = true;
-            loadingScene= true;
-            SceneManager.LoadScene("EndScene");
+            return true;
         }
+        return false;
     }
 }

@@ -21,10 +21,10 @@ public class FallingEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D rayL = Physics2D.Raycast(transform.position - new Vector3(transform.localScale.x / 2, transform.localScale.y / 2), Vector2.down);
-        Debug.DrawRay(transform.position - new Vector3(transform.localScale.x / 2, transform.localScale.y / 2), Vector2.down, Color.blue);
-        RaycastHit2D rayR = Physics2D.Raycast(transform.position + new Vector3(transform.localScale.x / 2, -transform.localScale.y / 2), Vector2.down);
-        Debug.DrawRay(transform.position + new Vector3(transform.localScale.x / 2, -transform.localScale.y / 2), Vector2.down, Color.red);
+        RaycastHit2D rayL = Physics2D.Raycast(transform.position - new Vector3(transform.localScale.x * 0.7f / 2, transform.localScale.y * 0.7f / 2), Vector2.down, float.PositiveInfinity, ~LayerMask.GetMask("Ignore Raycast"));
+        Debug.DrawRay(transform.position - new Vector3(transform.localScale.x * 0.7f / 2, transform.localScale.y * 0.7f / 2), Vector2.down, Color.blue);
+        RaycastHit2D rayR = Physics2D.Raycast(transform.position + new Vector3(transform.localScale.x * 0.7f / 2, -transform.localScale.y * 0.7f / 2), Vector2.down, float.PositiveInfinity, ~LayerMask.GetMask("Ignore Raycast"));
+        Debug.DrawRay(transform.position + new Vector3(transform.localScale.x * 0.7f / 2, -transform.localScale.y * 0.7f / 2), Vector2.down, Color.red);
         if (rayL.collider != null && rayL.collider.gameObject.layer == 9)
         {
             rb.constraints = ~RigidbodyConstraints2D.FreezePositionY;

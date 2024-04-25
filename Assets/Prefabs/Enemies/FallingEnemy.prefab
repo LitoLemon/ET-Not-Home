@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6879040333481021222}
   - component: {fileID: 2783686560658416627}
+  - component: {fileID: 5307803972141820962}
   m_Layer: 0
   m_Name: FallingEnemy
-  m_TagString: Untagged
+  m_TagString: Destroyable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,6 +51,19 @@ MonoBehaviour:
   - {fileID: 4305821578623472015, guid: d5a711a89f448f34d98fa85592956789, type: 3}
   - {fileID: 3921664323043257513, guid: 1eec885f16205ec45b2fe1cc6d825922, type: 3}
   - {fileID: 4113598553384375493, guid: 50b63cbb3a7e19148aba6730962b1313, type: 3}
+--- !u!114 &5307803972141820962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669481554491376158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa65506623941048b64c962d9b875b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 5
 --- !u!1 &5397293456143827197
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +77,7 @@ GameObject:
   - component: {fileID: 8757954207854057274}
   m_Layer: 3
   m_Name: Top(standable)
-  m_TagString: Untagged
+  m_TagString: Destroyable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +92,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.056571785}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.35, y: 1.35, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6879040333481021222}
@@ -171,7 +185,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.056571785}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.35, y: 1.35, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6879040333481021222}

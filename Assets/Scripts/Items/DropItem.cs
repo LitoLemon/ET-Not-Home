@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 public class DropItem : MonoBehaviour
@@ -8,9 +7,10 @@ public class DropItem : MonoBehaviour
 
     [SerializeField] public GameObject[] items;
     private bool quitting = false;
+
     private void Start()
     {
-        InventoryManager.loadingScene = false;
+        MySceneManager.loadingScene = false;
     }
     private void OnApplicationQuit()
     {
@@ -18,7 +18,7 @@ public class DropItem : MonoBehaviour
     }
     private void OnDestroy()
     {
-        if (!quitting && !InventoryManager.loadingScene)
+        if (!quitting && !MySceneManager.loadingScene)
         {
             int randInt = Random.Range(0, items.Length);
             Instantiate(items[randInt], transform.position, Quaternion.identity);

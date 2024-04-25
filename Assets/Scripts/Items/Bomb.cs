@@ -39,8 +39,11 @@ public class Bomb : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //make sure to disable collision on the circle collider that you dont want to hit with the bomb.
+        if (collision.gameObject.CompareTag("Destroyable") && !collision.gameObject.CompareTag("Undestroyable"))
+        {
+            inRadius.Add(collision.gameObject);
+        }
 
-        inRadius.Add(collision.gameObject);
         foreach(GameObject obj in inRadius)
         {
             RaycastHit2D ray = Physics2D.Raycast(transform.position, obj.transform.position - transform.position, float.PositiveInfinity, ~LayerMask.GetMask("PlayerProjectiles"));

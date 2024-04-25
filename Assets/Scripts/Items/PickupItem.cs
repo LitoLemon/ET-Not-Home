@@ -12,7 +12,7 @@ public class PickupItem : MonoBehaviour
         {
             if (gameObject.tag != "Hp" || (gameObject.tag == "Hp" && InventoryManager.Inventory["Hp"] < 3))
             {
-                InventoryManager.AdjustItemAmount(gameObject.tag, 1);
+                InventoryManager.AdjustItemAmount(gameObject.tag, amount);
                 try
                 {
                     Destroy(transform.parent.gameObject);
