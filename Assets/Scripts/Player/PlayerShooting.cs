@@ -6,7 +6,8 @@ public class PlayerShooting : MonoBehaviour
 {
     public GameObject bomb;
     public GameObject fireball;
-    public Vector2 fireballSpeed;
+    public float fireballSpeed;
+    public float fireballLifeTime;
 
     // Update is called once per frame
     void Update()
@@ -19,11 +20,13 @@ public class PlayerShooting : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && InventoryManager.Inventory["Fireball"] > 0)
         {
             GameObject fireballTemp = Instantiate(fireball, transform.position, Quaternion.identity);
-            if (GetComponent<SpriteRenderer>().flipX && fireballSpeed.x > 0)
+            if (GetComponent<SpriteRenderer>().flipX && fireballSpeed > 0)
             {
                 fireballSpeed *= -1;
             }
-            fireballTemp.GetComponentInChildren<Rigidbody2D>().AddForce(fireballSpeed + GetComponent<Rigidbody2D>().velocity, ForceMode2D.Impulse);
+            Vector2 fireballForce = new Vector2(fireballSpeed + GetComponent<Rigidbody2D>().velocity.x, 0);
+            fireballTemp.GetComponentInChildren<Rigidbody2D>().AddForce(fireballForce, ForceMode2D.Impulse);
+            Destroy(fireballTemp, fireballLifeTime);
             InventoryManager.AdjustItemAmount("Fireball", -1);
         }
     }

@@ -7,7 +7,7 @@ public class Fireball : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == 7 || (collision.gameObject.layer == 3 && collision.gameObject.CompareTag("Undestroyable")))
+        if(collision.gameObject.layer == 7 || (collision.gameObject.layer == 3 && collision.gameObject.CompareTag("Destroyable")))
         {
             try
             {
@@ -39,6 +39,6 @@ public class Fireball : MonoBehaviour
                 
             }
         }
-        Destroy(collision.transform.parent.gameObject);
+        Destroy(transform.parent.gameObject);
     }
 }

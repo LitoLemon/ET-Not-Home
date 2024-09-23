@@ -8,7 +8,8 @@ public class Bomb : MonoBehaviour
 {
     public float delay;
     public CircleCollider2D blastRadius;
-    private List<GameObject> inRadius = new();
+    public int rayAmount;
+    //private List<GameObject> inRadius = new();
     private int i = 0;
 
     // Update is called once per frame
@@ -26,22 +27,32 @@ public class Bomb : MonoBehaviour
 
     private void Explode()
     {
-        if(i == 1)
+        for (int i = 0; i < rayAmount; i++)
         {
-            Destroy(gameObject);
+            float y = 1 / (rayAmount / 2) * (rayAmount / 2 - i);
+            if(i > rayAmount / 2)
+            {
+
+            }
+            float x = 0 - (1 - y);
+            Vector3 direction = new Vector3();
+            Ray ray = new Ray(transform.position, )
+            if
         }
-        blastRadius.enabled = true;
-        //activates the trigger
-        i++;
-        delay = 0.1f;
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
+        
+        
+        /*
         //make sure to disable collision on the circle collider that you dont want to hit with the bomb.
-        if (collision.gameObject.CompareTag("Destroyable") && !collision.gameObject.CompareTag("Undestroyable"))
+        if (collision.gameObject.CompareTag("Destroyable") *//*&& !collision.gameObject.CompareTag("Undestroyable")*//*)
         {
             inRadius.Add(collision.gameObject);
+            Debug.Log(collision.gameObject + " added");
         }
 
         foreach(GameObject obj in inRadius)
@@ -68,5 +79,5 @@ public class Bomb : MonoBehaviour
             }
         }
                 
-    }
+    }*/
 }

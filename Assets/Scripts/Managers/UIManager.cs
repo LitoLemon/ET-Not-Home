@@ -40,11 +40,11 @@ public class UIManager : MonoBehaviour
                 case "EndSceneTxt":
                     if (MySceneManager.won)
                     {
-                        obj.GetComponent<TextMeshProUGUI>().text = "You won! \n Play again?";
+                        obj.GetComponent<TextMeshProUGUI>().text = "You got E.T home! \n Play again?";
                     }
                     else
                     {
-                        obj.GetComponent<TextMeshProUGUI>().text = "You Lost... \n Try again?";
+                        obj.GetComponent<TextMeshProUGUI>().text = "You got E.T. killed... \n Try again?";
                     }
                     break;
             }
