@@ -12,11 +12,11 @@ public class PlayerShooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E) && InventoryManager.Inventory["Bomb"] > 0)
+/*        if(Input.GetKeyDown(KeyCode.E) && InventoryManager.Inventory["Bomb"] > 0)
         {
             GameObject bombTemp = Instantiate(bomb, transform.position, Quaternion.identity);
             InventoryManager.AdjustItemAmount("Bomb", -1);
-        }
+        }*/
         if (Input.GetKeyDown(KeyCode.F) && InventoryManager.Inventory["Fireball"] > 0)
         {
             GameObject fireballTemp = Instantiate(fireball, transform.position, Quaternion.identity);

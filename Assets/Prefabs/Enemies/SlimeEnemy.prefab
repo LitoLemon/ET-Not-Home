@@ -177,7 +177,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 4305821578623472015, guid: d5a711a89f448f34d98fa85592956789, type: 3}
   - {fileID: 3921664323043257513, guid: 1eec885f16205ec45b2fe1cc6d825922, type: 3}
   - {fileID: 4113598553384375493, guid: 50b63cbb3a7e19148aba6730962b1313, type: 3}
 --- !u!114 &1839288781422357050
